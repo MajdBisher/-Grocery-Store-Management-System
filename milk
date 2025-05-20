@@ -1,0 +1,25 @@
+from item import Item
+
+
+class Milk(Item):
+  
+    def __init__(self, price: float, expiration_date: str) -> None:
+     
+        super().__init__("MILK", price)
+        self._expiration_date = expiration_date  # תכונה מוגנת לתאריך תפוגה
+
+    def put_on_shelf(self, shelf_id: int) -> None:
+      
+        print(f"Milk carton is put in the fridge on shelf #{shelf_id}.")
+
+    def get_department(self) -> str:
+     
+        return "DAIRY"
+
+    def print_details(self) -> None:
+      
+        print(
+            f"Item #{self.get_id()} - {self.get_name()} costs {self.get_price()} nis. "
+            f"It belongs to the {self.get_department()} department. "
+            f"Should be kept COLD, will expire on {self._expiration_date}."
+        )
