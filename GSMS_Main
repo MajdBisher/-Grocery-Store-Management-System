@@ -1,0 +1,83 @@
+
+from milk import Milk
+from pepper import Pepper
+
+
+print("Name: Majd Bisher")
+print("Email: MajdBisher85@gmail.com")
+
+print("\nWelcome to Majd's Store !")
+
+
+grocery_store = []
+
+while True:
+    command = input("\nEnter a command: ").strip()
+
+    if command == "add_milk":
+        
+        try:
+            price = float(input("Please insert the price of the milk: "))
+            expiration_date = input("Please insert the expiration date of the milk: ")
+            grocery_store.append(Milk(price, expiration_date))
+            print("Milk added successfully.")
+        except ValueError:
+            print("Invalid input for price. Please enter a valid number.")
+
+    elif command == "add_pepper":
+        try:
+            color = input("Please insert the color of the pepper: ")
+            price_per_kg = float(input("Please insert the pepper's price per KG: "))
+            weight = float(input("Please insert the pepper's weight: "))
+            grocery_store.append(Pepper(color, price_per_kg, weight))
+            print("Pepper added successfully.")
+        except ValueError:
+            print("Invalid input for price or weight. Please enter valid numbers.")
+
+    elif command == "print":
+        if not grocery_store:
+            print("The store is empty.")
+        else:
+            print("Current items in the grocery store:")
+            for item in grocery_store:
+                item.print_details()
+
+    elif command == "put_on_shelf":
+        try:
+            shelf_id = int(input("Please insert the shelf id: "))
+            for item in grocery_store:
+                item.put_on_shelf(shelf_id)
+            print(f"All items placed on shelf #{shelf_id}.")
+        except ValueError:
+            print("Invalid shelf ID. Please enter a valid integer.")
+
+    elif command == "total_value":
+        total_price = sum(item.get_price() for item in grocery_store)
+        print(f"The total price is {total_price}.")
+
+    elif command == "avg_value":
+        if not grocery_store:
+            print("No items in the store.")
+        else:
+            avg_price = sum(item.get_price() for item in grocery_store) / len(grocery_store)
+            print(f"The average price is {avg_price:.2f}.")
+
+    elif command == "remove":
+        try:
+            item_id = int(input("Please insert the id of the item you want to remove: "))
+            for item in grocery_store:
+                if item.get_id() == item_id:
+                    grocery_store.remove(item)
+                    print(f"Item #{item_id} was removed from the list.")
+                    break
+            else:
+                print(f"Item #{item_id} was not found in the list.")
+        except ValueError:
+            print("Invalid ID. Please enter a valid integer.")
+
+    elif command == "exit":
+        print("Exiting the program. Goodbye!")
+        break
+
+    else:
+        print("Invalid command. Please try again.")
