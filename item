@@ -1,0 +1,42 @@
+import abc
+
+
+class Item(abc.ABC):
+
+    _next_id = 1
+
+    def __init__(self, name: str, price: float):
+
+        self._name = name
+        self._price = price
+
+
+        self._item_id = Item._next_id
+        Item._next_id += 1
+
+    def get_id(self) -> int:
+
+        return self._item_id
+
+    def get_name(self) -> str:
+
+        return self._name
+
+    def get_price(self) -> float:
+
+        return self._price
+
+    @abc.abstractmethod
+    def put_on_shelf(self, shelf_id: int) -> None:
+
+        pass
+
+    @abc.abstractmethod
+    def get_department(self) -> str:
+
+        pass
+
+    @abc.abstractmethod
+    def print_details(self) -> None:
+
+        pass
