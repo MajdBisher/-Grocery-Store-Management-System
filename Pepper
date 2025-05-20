@@ -1,0 +1,26 @@
+from item import Item
+
+
+class Pepper(Item):
+  
+    def __init__(self, color: str, price_per_kg: float, weight: float) -> None:
+    
+        price = price_per_kg * weight  # מחשבים את המחיר הכולל
+        super().__init__("Pepper", price)
+        self._color = color  # תכונה מוגנת לצבע
+        self._weight = weight  # תכונה מוגנת למשקל
+
+    def put_on_shelf(self, shelf_id: int) -> None:
+        
+        print(f"Pepper is put on vegetable shelf #{shelf_id}.")
+
+    def get_department(self) -> str:
+     
+        return "VEGETABLE"
+
+    def print_details(self) -> None:
+       
+        print(
+            f"Item #{self.get_id()} - {self._color} {self.get_name()} belongs to the {self.get_department()} department. "
+            f"It weights {self._weight} kg and costs {self.get_price()} nis."
+        )
